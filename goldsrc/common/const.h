@@ -49,6 +49,8 @@
 #define	FL_IMMUNE_SLIME	262144
 #define FL_IMMUNE_LAVA	524288
 
+#define FL_KILLME (1 << 30)
+
 // edict->movetype values
 #define	MOVETYPE_NONE			0		// never moves
 #define	MOVETYPE_ANGLENOCLIP	1
