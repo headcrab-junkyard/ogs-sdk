@@ -162,7 +162,7 @@ typedef struct entvars_s
 	edict_t	*groundentity;
 	
 	float	spawnflags;
-	float	flags;
+	int	flags;
 	
 	float	colormap;
 	float	team;
