@@ -43,9 +43,10 @@ interface IGame : public IBaseInterface
 	/**
 	*/
 	//virtual void Update(float afTimeStep) = 0;
-	virtual void StartFrame() = 0;
+	//virtual void StartFrame() = 0;
 	//virtual void Frame(double frametime) = 0;
+	virtual void Update() = 0;
 	
 	/// @return current game title string
-	virtual const char *GetDescription() const = 0;
+	//virtual const char *GetDescription() const = 0;
 };
