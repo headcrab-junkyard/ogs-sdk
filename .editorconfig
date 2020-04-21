@@ -1,0 +1,16 @@
+# Manual:
+# http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# 1 tab = 4 spaces indentation
+[*]
+indent_style = tab
+indent_size = 4
+insert_final_newline = false
+
+# Matches the exact files either package.json or .travis.yml
+[{package.json,*.yml}]
+indent_style = space
+indent_size = 2
