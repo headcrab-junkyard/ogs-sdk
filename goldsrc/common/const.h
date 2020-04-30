@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 1996-1997 Id Software, Inc.
+ * Copyright (C) 1996-2001 Id Software, Inc.
  * Copyright (C) 2018, 2020 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
@@ -77,6 +77,7 @@
 #define	DEAD_NO					0
 #define	DEAD_DYING				1
 #define	DEAD_DEAD				2
+#define DEAD_RESPAWNABLE		3
 
 #define	DAMAGE_NO				0
 #define	DAMAGE_YES				1
