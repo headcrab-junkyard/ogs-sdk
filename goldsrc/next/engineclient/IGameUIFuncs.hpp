@@ -23,7 +23,7 @@
 #pragma once
 
 #include "CommonTypes.hpp"
-#include "Interface.hpp"
+#include "tier1/interface.h"
 
 constexpr auto OGS_GAMEUIFUNCS_INTERFACE_VERSION{"OGSGameUIFuncs001"};
 

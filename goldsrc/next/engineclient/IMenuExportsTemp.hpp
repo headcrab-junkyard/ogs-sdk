@@ -22,7 +22,7 @@
 #pragma once
 
 #include "const.h"
-#include "interface.h"
+#include "tier1/interface.h"
 
 constexpr auto OGS_MENUEXPORTS_INTERFACE_VERSION{"OGSMenuExports000"};
 

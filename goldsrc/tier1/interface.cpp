@@ -25,7 +25,7 @@ IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <dlfcn.h>
 #endif
 
-#include "interface.h"
+#include "tier1/interface.h"
 
 #ifdef _WIN32
 	#define EXPORT [[dllexport]]
