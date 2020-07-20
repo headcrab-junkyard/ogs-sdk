@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-2001 Id Software, Inc.
- * Copyright (C) 2018-2019 BlackPhrase
+ * Copyright (C) 2018-2020 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,10 @@
 #define	FCVAR_ARCHIVE	1	///< set to cause it to be saved to vars.rc
 #define	FCVAR_USERINFO	2	///< added to userinfo  when changed
 #define	FCVAR_SERVER	4	///< notifies players when changed
+
+#define FCVAR_EXTDLL (1 << 3)
+#define FCVAR_CLIENTDLL (1 << 4)
+
 //#define	FCVAR_SERVERINFO	4	///< added to serverinfo when changed
 //#define	FCVAR_NOSET		8	///< don't allow change from console at all,
 							/// but can be set from the command line
