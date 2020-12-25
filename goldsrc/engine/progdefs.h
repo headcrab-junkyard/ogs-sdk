@@ -114,10 +114,11 @@ typedef struct entvars_s
 	float	ideal_yaw;
 	float	yaw_speed;
 	
-	float	modelindex; // *** model index in the precached list
+	int	modelindex; // *** model index in the precached list
 	string_t	model;
 	
-	string_t	weaponmodel;
+	int viewmodel;
+	int	weaponmodel;
 	
 	vec3_t	absmin; // *** origin + mins / maxs
 	vec3_t	absmax;
@@ -149,7 +150,8 @@ typedef struct entvars_s
 	int	deadflag;
 	vec3_t	view_ofs; // add to origin to get eye point
 	
-	int	button0; // fire
+	int	button;
+	//int button0; // fire
 	int	button1; // use
 	int	button2; // jump
 	int	impulse; // weapon changes
