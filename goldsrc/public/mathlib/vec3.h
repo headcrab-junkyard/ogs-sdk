@@ -273,12 +273,13 @@ public:
 			z = float(int(z));
 	};
 
-	float toYaw();
-	float toPitch();
-	angles_t toAngles();
+	float ToYaw() const;
+	float ToPitch() const;
+	angles_t ToAngles() const;
+	
 	friend idVec3 LerpVector(const idVec3 &w1, const idVec3 &w2, const float t);
 
-	char *string();
+	char *ToString() const;
 };
 
 inline idVec3 operator*(float a, idVec3 b)

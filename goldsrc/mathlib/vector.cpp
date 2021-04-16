@@ -39,7 +39,7 @@ idVec3 idVec3::Origin{0.0f};
 
 Bounds	boundsZero;
 
-float idVec3::toYaw( void ) {
+float idVec3::ToYaw( void ) const {
 	float yaw;
 	
 	if ( ( y == 0 ) && ( x == 0 ) ) {
@@ -54,7 +54,7 @@ float idVec3::toYaw( void ) {
 	return yaw;
 }
 
-float idVec3::toPitch( void ) {
+float idVec3::ToPitch( void ) const {
 	float	forward;
 	float	pitch;
 	
@@ -76,7 +76,7 @@ float idVec3::toPitch( void ) {
 }
 
 /*
-angles_t idVec3::toAngles( void ) {
+angles_t idVec3::ToAngles( void ) const {
 	float forward;
 	float yaw;
 	float pitch;
@@ -130,7 +130,7 @@ This is just a convenience function
 for printing vectors
 =============
 */
-char *idVec3::string( void ) {
+char *idVec3::ToString( void ) const {
 	static	int		index = 0;
 	static	char	str[ 8 ][ 36 ];
 	char	*s;
