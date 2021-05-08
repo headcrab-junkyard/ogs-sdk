@@ -206,6 +206,8 @@ typedef struct entvars_s
 	float pain_finished;
 	float radsuit_finished;
 	
+	edict_t *pContainingEntity; // TODO
+	
 	///////////////////////////////////
 	
 	//float	weaponframe;
