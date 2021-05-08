@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-2001 Id Software, Inc.
- * Copyright (C) 2018, 2020 BlackPhrase
+ * Copyright (C) 2018, 2020-2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -116,7 +116,9 @@
 
 // PGM 01/21/97 
 #define TE_BEAM				16 // obsolete(?)
-// PGM 01/21/97 
+// PGM 01/21/97
+
+#define TE_TEXTMESSAGE 29
 
 #define	MSG_BROADCAST	0		// unreliable to all
 #define	MSG_ONE			1		// reliable to one (msg_entity)
