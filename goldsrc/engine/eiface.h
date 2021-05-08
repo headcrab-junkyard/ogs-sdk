@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-2001 Id Software, Inc.
- * Copyright (C) 2018-2019 BlackPhrase
+ * Copyright (C) 2018-2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -198,14 +198,14 @@ typedef struct enginefuncs_s
 	struct entvars_s *(*pfnGetVarsOfEnt)(edict_t *pEnt);
 	
 	edict_t *(*pfnPEntityOfEntOffset)(int nOffset);
-	int (*pfnEntOffssetOfPEntity)(const edict_t *pEntity);
+	int (*pfnEntOffsetOfPEntity)(const edict_t *pEntity);
 	
 	int (*pfnIndexOfEdict)(const edict_t *pEdict);
 	edict_t *(*pfnPEntityOfEntIndex)(int nIndex);
 	
 	edict_t *(*pfnFindEntityByVars)(struct entvars_s *pvars);
 	
-	void *(*GetModelPtr)(edict_t *pEdict);
+	void *(*pfnGetModelPtr)(edict_t *pEdict);
 	
 	int (*pfnRegUserMsg)(const char *sName, int nSize);
 	
@@ -450,7 +450,7 @@ typedef struct DLL_FUNCTIONS
 	void (*pfnClientKill)(edict_t *ent);
 	void (*pfnClientPutInServer)(edict_t *ent); // PutClientInServer
 	void		(*pfnClientCommand) (edict_t *ent);
-	void		(*pfnClientUserinfoChanged) (edict_t *ent, char *userinfo); // TODO: infobuffer
+	void		(*pfnClientUserInfoChanged) (edict_t *ent, char *userinfo); // TODO: infobuffer
 	
 	// @param num_edicts - current number, <= max_edicts
 	void (*pfnServerActivate)(struct edict_s *edicts, int num_edicts, int max_clients);
