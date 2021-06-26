@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2020 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,17 @@ typedef struct
 	float	dist;
 } pmplane_t;
 
-typedef struct
+typedef struct pmtrace_s
 {
-	qboolean	allsolid;	// if true, plane is not valid
-	qboolean	startsolid;	// if true, the initial point was in a solid area
-	qboolean	inopen, inwater;
-	float		fraction;		// time completed, 1.0 = didn't hit anything
-	vec3_t		endpos;			// final position
-	pmplane_t		plane;			// surface normal at impact
-	int			ent;			// entity the surface is on
+	qboolean allsolid; ///< If true, plane is not valid
+	qboolean startsolid; ///< If true, the initial point was in a solid area
+	qboolean inopen, inwater; ///< End point is in empty space or in water
+	
+	float fraction; ///< Time completed, 1.0 = didn't hit anything
+	vec3_t endpos; ///< Final position
+	pmplane_t plane; ///< Surface normal at impact
+	int ent; ///< Entity the surface is on (entity at impact)
+	
+	vec3_t deltavelocity; ///< Change in player's velocity caused by impact // TODO: put to use
+	int hitgroup; ///< Only run on server // TODO: put to use
 } pmtrace_t;
