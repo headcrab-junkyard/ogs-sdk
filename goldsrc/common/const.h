@@ -39,11 +39,9 @@
 #define	FL_ONGROUND				512
 #define	FL_PARTIALGROUND		1024	// not all corners are valid
 #define	FL_WATERJUMP			2048	// player jumping out of water
-#define	FL_JUMPRELEASED			4096	// for jump debouncing
-#ifdef QUAKE2
-#define FL_FLASHLIGHT			8192
-#define FL_ARCHIVE_OVERRIDE		1048576
-#endif
+#define FL_FROZEN (1 << 12)
+#define FL_FAKECLIENT (1 << 13)
+//#define	FL_JUMPRELEASED			4096	// for jump debouncing
 
 #define FL_IMMUNE_WATER	131072
 #define	FL_IMMUNE_SLIME	262144
