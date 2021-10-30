@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,3 +19,15 @@
 /// @file
 
 #pragma once
+
+#include "const.h"
+
+typedef struct con_nprint_s
+{
+	int index; ///< Row number
+	float time_to_live; ///< Number of seconds before it disappears
+	vec3_t color; ///< RGB color (0.0 -> 1.0 scale)
+} con_nprint_t;
+
+void Con_NPrintf(int index, const char *fmt, ...);
+void Con_NXPrintf(con_nprint_t *info, const char *fmt, ...);
