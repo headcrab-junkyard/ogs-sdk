@@ -147,9 +147,13 @@ enum
 #define CONTENT_LAVA	-5
 #define CONTENT_SKY    -6
 
+// channels
 enum
 {
+	CHAN_AUTO = 0,
+	CHAN_WEAPON,
 	CHAN_VOICE,
+	CHAN_ITEM,
 	CHAN_BODY
 };
 
