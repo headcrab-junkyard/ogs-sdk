@@ -72,14 +72,20 @@
 #define	SOLID_BSP				4		// bsp clip, touch on edge, block
 
 // edict->deadflag values
-#define	DEAD_NO					0
-#define	DEAD_DYING				1
-#define	DEAD_DEAD				2
-#define DEAD_RESPAWNABLE		3
+enum
+{
+	DEAD_NO = 0,
+	DEAD_DYING,
+	DEAD_DEAD,
+	DEAD_RESPAWNABLE
+};
 
-#define	DAMAGE_NO				0
-#define	DAMAGE_YES				1
-#define	DAMAGE_AIM				2
+enum
+{
+	DAMAGE_NO = 0,
+	DAMAGE_YES,
+	DAMAGE_AIM
+};
 
 // entity effects
 
@@ -118,10 +124,13 @@
 
 #define TE_TEXTMESSAGE 29
 
-#define	MSG_BROADCAST	0		// unreliable to all
-#define	MSG_ONE			1		// reliable to one (msg_entity)
-#define	MSG_ALL			2		// reliable to all
-#define	MSG_INIT		3		// write to the init string
+enum
+{
+	MSG_BROADCAST = 0,	// unreliable to all
+	MSG_ONE,			// reliable to one (msg_entity)
+	MSG_ALL,			// reliable to all
+	MSG_INIT			// write to the init string
+};
 
 #define CONTENTS_EMPTY  -1
 #define CONTENTS_SOLID  -2
@@ -138,8 +147,11 @@
 #define CONTENT_LAVA	-5
 #define CONTENT_SKY    -6
 
-#define	CHAN_VOICE	2
-#define	CHAN_BODY	4
+enum
+{
+	CHAN_VOICE,
+	CHAN_BODY
+};
 
 #define	ATTN_NORM	1
 
