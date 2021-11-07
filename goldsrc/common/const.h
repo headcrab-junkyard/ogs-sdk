@@ -65,11 +65,14 @@
 #define MOVETYPE_FOLLOW			12		// track movement of aiment
 
 // edict->solid values
-#define	SOLID_NOT				0		// no interaction with other objects
-#define	SOLID_TRIGGER			1		// touch on edge, but not blocking
-#define	SOLID_BBOX				2		// touch on edge, block
-#define	SOLID_SLIDEBOX			3		// touch on edge, but not an onground
-#define	SOLID_BSP				4		// bsp clip, touch on edge, block
+enum
+{
+	SOLID_NOT = 0,	// no interaction with other objects
+	SOLID_TRIGGER,	// touch on edge, but not blocking
+	SOLID_BBOX,		// touch on edge, block
+	SOLID_SLIDEBOX,	// touch on edge, but not an onground
+	SOLID_BSP		// bsp clip, touch on edge, block
+};
 
 // edict->deadflag values
 enum
@@ -217,9 +220,27 @@ enum
 	CHAN_BODY
 };
 
-#define	ATTN_NORM	1
+// attenuation values
+enum
+{
+	ATTN_NONE = 0,
+	ATTN_NORM,
+	ATTN_IDLE,
+	ATTN_STATIC
+};
 
 #define PITCH_NORM 100
+
+enum
+{
+	kRenderNormal,
+	//kRenderTransColor,
+};
+
+enum
+{
+	kRenderFxNone = 0
+};
 
 enum
 {
