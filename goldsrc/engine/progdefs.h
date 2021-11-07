@@ -138,7 +138,7 @@ typedef struct entvars_s
 	float	solid;
 	
 	float	skin;
-	float	effects;
+	int	effects;
 	
 	float	gravity;
 	
@@ -168,8 +168,8 @@ typedef struct entvars_s
 	edict_t *owner; // who launched a missile
 	edict_t	*groundentity;
 	
-	float	spawnflags;
-	int	flags;
+	int spawnflags;
+	int flags;
 	
 	float	colormap;
 	float	team;
