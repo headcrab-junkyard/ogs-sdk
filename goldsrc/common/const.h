@@ -201,6 +201,7 @@ enum
 #define CONTENTS_SLIME	-4
 #define CONTENTS_LAVA	-5
 #define CONTENTS_SKY    -6
+#define CONTENTS_LADDER -16
 
 // TODO: refactor this!
 #define CONTENT_EMPTY  -1
