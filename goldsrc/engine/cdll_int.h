@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,12 +71,23 @@ typedef struct SCREENINFO_s
 
 typedef struct client_data_s
 {
-	// TODO
+	vec3_t origin;
+	vec3_t viewangles;
+	
+	int iWeaponBits;
+	
+	float fov;
 } client_data_t;
 
 typedef struct client_sprite_s
 {
-	// TODO
+	char szName[64];
+	char szSprite[64];
+	
+	int hspr;
+	int iRes;
+	
+	wrect_t rc;
 } client_sprite_t;
 
 typedef struct hud_player_info_s
