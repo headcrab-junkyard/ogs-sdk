@@ -25,8 +25,6 @@
 
 typedef struct
 {
-	int	pad[28];
-	int	world;
 	float	time;
 	float	frametime;
 	float	force_retouch;	// force all entities to touch triggers
@@ -44,13 +42,14 @@ typedef struct
 	float	teamplay;
 	float	serverflags; // propagated from level to level, used to keep track of completed episodes
 	
-	float	total_secrets;
-	float	total_monsters;
+	//float	total_secrets;
+	//float	total_monsters;
 	
 	float	found_secrets; // number of secrets found
-	float	killed_monsters; // number of monsters killed
+	//float	killed_monsters; // number of monsters killed
 	
 	// spawnparms are used to encode information about clients across server level changes
+/*
 	float	parm1;
 	float	parm2;
 	float	parm3;
@@ -67,6 +66,7 @@ typedef struct
 	float	parm14;
 	float	parm15;
 	float	parm16;
+*/
 	
 	// set by makevectors()
 	vec3_t	v_forward;
