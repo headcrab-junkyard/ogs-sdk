@@ -171,8 +171,8 @@ typedef struct entvars_s
 	int spawnflags;
 	int flags;
 	
-	float	colormap;
-	float	team;
+	int colormap;
+	int team;
 	
 	float	max_health; // players maximum health is stored here
 	float	teleport_time; // don't back up
@@ -180,8 +180,8 @@ typedef struct entvars_s
 	float	armortype; // save this fraction of incoming damage
 	float	armorvalue;
 	
-	float	waterlevel; // 0 = not in, 1 = feet, 2 = wast, 3 = eyes
-	float	watertype; // a contents value
+	int waterlevel; // 0 = not in, 1 = feet, 2 = wast, 3 = eyes
+	int watertype; // a contents value
 	
 	string_t	target;
 	string_t	targetname;
