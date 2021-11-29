@@ -50,19 +50,23 @@
 #define FL_KILLME (1 << 30)
 
 // edict->movetype values
-#define	MOVETYPE_NONE			0		// never moves
-#define	MOVETYPE_ANGLENOCLIP	1
-#define	MOVETYPE_ANGLECLIP		2
-#define	MOVETYPE_WALK			3		// gravity
-#define	MOVETYPE_STEP			4		// gravity, special edge handling
-#define	MOVETYPE_FLY			5
-#define	MOVETYPE_TOSS			6		// gravity
-#define	MOVETYPE_PUSH			7		// no clip to world, push and crush
-#define	MOVETYPE_NOCLIP			8
-#define	MOVETYPE_FLYMISSILE		9		// extra size to monsters
-#define	MOVETYPE_BOUNCE			10
-#define MOVETYPE_BOUNCEMISSILE	11		// bounce w/o gravity
-#define MOVETYPE_FOLLOW			12		// track movement of aiment
+enum
+{
+	MOVETYPE_NONE = 0,			// never moves
+	//MOVETYPE_ANGLENOCLIP,
+	//MOVETYPE_ANGLECLIP,
+	MOVETYPE_WALK = 3,			// gravity (for players only)
+	MOVETYPE_STEP,				// gravity, special edge handling (for monsters)
+	MOVETYPE_FLY,
+	MOVETYPE_TOSS,				// gravity
+	MOVETYPE_PUSH,				// no clip to world, push and crush
+	MOVETYPE_NOCLIP,
+	MOVETYPE_FLYMISSILE,		// extra size to monsters
+	MOVETYPE_BOUNCE,
+	MOVETYPE_BOUNCEMISSILE,		// bounce w/o gravity
+	MOVETYPE_FOLLOW,			// track movement of aiment
+	MOVETYPE_PUSHSTEP
+};
 
 // edict->solid values
 enum
