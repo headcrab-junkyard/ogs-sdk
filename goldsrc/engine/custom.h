@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018-2019 BlackPhrase
+ * Copyright (C) 2018-2019, 2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@
 
 #define MAX_QPATH 64 // Must match value in quakedef.h
 
+/// Resource flags
+#define RES_CUSTOM (1 << 2)
+
 typedef enum
 {
 	t_sound = 0,
@@ -34,6 +37,18 @@ typedef enum
 	t_eventscript,
 	t_world ///< Alias for t_model (BSP world is also a model)
 } resourcetype_t;
+
+typedef struct
+{
+	int size;
+} _resourceinfo_t;
+
+#define MAX_RESOURCEINFO 8 // == size of resourcetype_t?
+
+typedef struct resourceinfo_s
+{
+	_resourceinfo_t info[MAX_RESOURCEINFO];
+} resourceinfo_t;
 
 typedef struct resource_s
 {
@@ -54,4 +69,23 @@ typedef struct resource_s
 
 typedef struct customization_s
 {
+	qboolean bInUse; ///< Is this customization in use
+	resource_t resource; ///< The resource for this customization
+	qboolean bTranslated; ///< Has the raw data been translated info a usable format?
+	
+	int nUserData1; ///< Customzation-specific data
+	int nUserData2; ///< More customzation-specific data
+	
+	void *pInfo;
+	void *pBuffer;
+	
+	struct customization_s *pNext; ///< Next in chain
 } customization_t;
+
+#define FCUST_FROMHPAK (1 << 0)
+#define FCUST_WIPEDATA (1 << 1)
+#define FCUST_IGNOREINIT (1 << 2)
+
+void COM_ClearCustomizationList(struct customization_s *pHead, qboolean bClearDecals);
+qboolean COM_CreateCustomization(struct customization_s *pListHead, struct resource_s *pResource, int nPlayerNum, int nFlags, struct customization_s **pCustomization, int *nLumps);
+int COM_SizeofResourceList(struct resource_s *pList, struct resourceinfo_s *pResInfo);
