@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018-2021 BlackPhrase
+ * Copyright (C) 2018-2022 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -99,114 +99,174 @@ typedef struct
 //
 typedef struct entvars_s
 {
-	string_t	classname; // spawn function
+	string_t classname; // spawn function
+	string_t globalname; // TODO: unused
 	
-	vec3_t	origin; // ***
-	vec3_t	oldorigin; // ***
-	vec3_t	velocity;
+	vec3_t origin; // ***
+	vec3_t oldorigin; // ***
 	
-	vec3_t	movedir; // mostly for doors, but also used for waterjump
+	vec3_t velocity;
+	vec3_t basevelocity;
+	vec3_t clbasevelocity; // TODO: unused
 	
-	vec3_t	angles;
-	vec3_t	avelocity;
-	vec3_t	basevelocity; // TODO: q2
-	vec3_t	punchangle;
-	vec3_t	v_angle; // view / targeting angle for players 
+	vec3_t movedir; // mostly for doors, but also used for waterjump
 	
-	float	fixangle;
-	float	idealpitch;
-	float	pitch_speed; // TODO: q2
-	float	ideal_yaw;
-	float	yaw_speed;
+	vec3_t angles;
+	vec3_t avelocity;
 	
-	int	modelindex; // *** model index in the precached list
-	string_t	model;
+	vec3_t punchangle; // TODO: unused?
+	vec3_t v_angle; // view / targeting angle for players 
 	
-	int viewmodel;
-	int	weaponmodel;
+	float fixangle;
+	float idealpitch;
+	float pitch_speed;
+	float ideal_yaw;
+	float yaw_speed;
 	
-	vec3_t	absmin; // *** origin + mins / maxs
-	vec3_t	absmax;
-	vec3_t	mins; // bounding box extents relative to origin
-	vec3_t	maxs;
-	vec3_t	size; // maxs - mins
+	int modelindex; // *** model index in the precached list
+	string_t model;
 	
-	float	ltime; // local time for entity
-	float	nextthink;
+	int viewmodel; // TODO: unused?
+	int weaponmodel; // TODO: unused?
 	
-	float	movetype;
-	float	solid;
+	vec3_t absmin; // *** origin + mins / maxs
+	vec3_t absmax;
+	vec3_t mins; // bounding box extents relative to origin
+	vec3_t maxs;
+	vec3_t size; // maxs - mins
 	
-	float	skin;
-	int	effects;
+	float ltime; // local time for entity
+	float nextthink;
 	
-	float	gravity;
+	int movetype;
+	int solid;
 	
-	int	light_level; // TODO: q2
+	int skin;
+	int body; // TODO: unused
+	int effects; // TODO: unused?
 	
-	float	frame;
+	float gravity;
+	float friction; // TODO: unused
+	
+	int light_level;
+	
+	int sequence; // TODO: unused
+	int gaitsequence; // TODO: unused
+	
+	float frame;
+	
+	float animtime; // TODO: unused
+	float framerate; // TODO: unused
+	
+	byte controller[4]; // TODO: unused
+	byte blending[2]; // TODO: unused
+	
+	float scale; // TODO: unused?
+	
+	int rendermode; // TODO: unused?
+	float renderamt; // TODO: unused?
+	vec3_t rendercolor; // TODO: unused?
+	int renderfx; // TODO: unused?
 	
 	// stats
-	float	health;
-	float	frags;
-	float	weapon; // one of the IT_SHOTGUN, etc flags
-	float	takedamage;
+	float health;
+	float frags; // TODO: unused?
+	int weapon; // one of the IT_SHOTGUN, etc flags // TODO: unused?
+	float takedamage;
 	
-	int	deadflag;
-	vec3_t	view_ofs; // add to origin to get eye point
+	int deadflag; // TODO: unused?
+	vec3_t view_ofs; // add to origin to get eye point
 	
-	int	button;
+	int button; // TODO: unused?
 	//int button0; // fire
-	int	button1; // use
-	int	button2; // jump
-	int	impulse; // weapon changes
+	//int button1; // use
+	//int button2; // jump
+	int impulse; // weapon changes // TODO: unused?
 	
 	edict_t *chain; // entity
-	edict_t *dmg_inflictor;
-	edict_t *enemy;
+	edict_t *dmg_inflictor; // TODO: unused?
+	edict_t *enemy; // TODO: unused?
 	edict_t	*aiment;
-	edict_t *owner; // who launched a missile
+	edict_t *owner; // who launched a missile // TODO: unused?
 	edict_t	*groundentity;
 	
-	int spawnflags;
+	int spawnflags; // TODO: unused?
 	int flags;
 	
 	int colormap;
 	int team;
 	
-	float	max_health; // players maximum health is stored here
-	float	teleport_time; // don't back up
+	float max_health; // players maximum health is stored here // TODO: unused?
+	float teleport_time; // don't back up
 	
-	float	armortype; // save this fraction of incoming damage
-	float	armorvalue;
+	float armortype; // save this fraction of incoming damage // TODO: unused?
+	float armorvalue; // TODO: unused?
 	
 	int waterlevel; // 0 = not in, 1 = feet, 2 = wast, 3 = eyes
 	int watertype; // a contents value
 	
-	string_t	target;
-	string_t	targetname;
-	string_t	netname;
-	string_t	message; // trigger messages
+	string_t target; // TODO: unused?
+	string_t targetname; // TODO: unused?
+	string_t netname; // TODO: unused?
+	string_t message; // trigger messages // TODO: unused?
 	
 	// damage is accumulated through a frame. and sent as one single
 	// message, so the super shotgun doesn't generate huge messages
-	float	dmg_take;
-	float	dmg_save;
-	float	dmg; // TODO: q2
-	float	dmgtime; // TODO: q2
+	float dmg_take; // TODO: unused?
+	float dmg_save; // TODO: unused?
+	float dmg; // TODO: unused?
+	float dmgtime; // TODO: unused?
 	
 	// contains names of wavs to play
-	string_t	noise;
-	string_t	noise1;
-	string_t	noise2;
-	string_t	noise3;
+	string_t noise; // TODO: unused?
+	string_t noise1; // TODO: unused?
+	string_t noise2; // TODO: unused?
+	string_t noise3; // TODO: unused?
 	
 	float speed;
-	float air_finished;
-	float pain_finished;
-	float radsuit_finished;
+	float air_finished; // TODO: unused?
+	float pain_finished; // TODO: unused?
+	float radsuit_finished; // TODO: unused?
 	
-	edict_t *pContainingEntity; // TODO
+	edict_t *pContainingEntity; // TODO: unused
+	
+	int playerclass; // TODO: unused
+	float maxspeed; // TODO: unused
+	
+	float fov; // TODO: unused
+	int weaponanim; // TODO: unused
+	
+	int pushmsec; // TODO: unused
+	
+	int bInDuck; // TODO: unused
+	int flTimeStepSound; // TODO: unused
+	int flSwimTime; // TODO: unused
+	int flDuckTime; // TODO: unused
+	int iStepLeft; // TODO: unused
+	float flFallVelocity; // TODO: unused
+	
+	int gamestate; // TODO: unused
+	
+	int oldbuttons; // TODO: unused
+	
+	int groupinfo; // TODO: unused
+	
+	int iuser1; // TODO: unused
+	int iuser2; // TODO: unused
+	int iuser3; // TODO: unused
+	int iuser4; // TODO: unused
+	float fuser1; // TODO: unused
+	float fuser2; // TODO: unused
+	float fuser3; // TODO: unused
+	float fuser4; // TODO: unused
+	vec3_t vuser1; // TODO: unused
+	vec3_t vuser2; // TODO: unused
+	vec3_t vuser3; // TODO: unused
+	vec3_t vuser4; // TODO: unused
+	edict_t *euser1; // TODO: unused
+	edict_t *euser2; // TODO: unused
+	edict_t *euser3; // TODO: unused
+	edict_t *euser4; // TODO: unused
 	
 	///////////////////////////////////
 	
