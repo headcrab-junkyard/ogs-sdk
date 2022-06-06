@@ -99,7 +99,7 @@ typedef struct
 //
 typedef struct entvars_s
 {
-	string_t classname; // spawn function
+	string_t classname; ///< Spawn function
 	string_t globalname; // TODO: unused
 	
 	vec3_t origin; // ***
@@ -107,61 +107,70 @@ typedef struct entvars_s
 	
 	vec3_t velocity;
 	vec3_t basevelocity;
-	vec3_t clbasevelocity; // TODO: unused
+	vec3_t clbasevelocity; ///< Base velocity that was passed in to server physics code so client can predict conveyors correctly. Server zeroes it, so we need to store it here // TODO: unused
 	
-	vec3_t movedir; // mostly for doors, but also used for waterjump
+	vec3_t movedir; ///< Mostly for doors, but also used for waterjump
 	
-	vec3_t angles;
-	vec3_t avelocity;
+	vec3_t angles; ///< Model angles
+	vec3_t avelocity; ///< Angle velocity (in degrees per sec)
 	
-	vec3_t punchangle; // TODO: unused?
-	vec3_t v_angle; // view / targeting angle for players 
+	vec3_t punchangle; ///< Auto-decaying view angle adjustment // TODO: unused?
+	vec3_t v_angle; ///< Viewing/targeting angle for players
 	
-	float fixangle;
+	// For parametric entities
+	vec3_t endpos; // TODO: unused
+	vec3_t startpos; // TODO: unused
+	
+	float impacttime; // TODO: unused
+	float starttime; // TODO: unused
+	
+	int fixangle; ///< 0 - nothing, 1 - force view angles, 2 - add avelocity
+	
 	float idealpitch;
 	float pitch_speed;
+	
 	float ideal_yaw;
 	float yaw_speed;
 	
-	int modelindex; // *** model index in the precached list
+	int modelindex; ///< *** model index in the precached list
 	string_t model;
 	
-	int viewmodel; // TODO: unused?
-	int weaponmodel; // TODO: unused?
+	int viewmodel; ///< Player's view model // TODO: unused?
+	int weaponmodel; ///< World model (what other players will see) // TODO: unused?
 	
-	vec3_t absmin; // *** origin + mins / maxs
-	vec3_t absmax;
-	vec3_t mins; // bounding box extents relative to origin
-	vec3_t maxs;
-	vec3_t size; // maxs - mins
+	vec3_t absmin; ///< *** origin + mins / maxs (bounding box min translated to world coords)
+	vec3_t absmax; ///< Bounding box max translated to world coords
+	vec3_t mins; ///< Bounding box extents relative to origin (local bounding box min)
+	vec3_t maxs; ///< Local bounding box max
+	vec3_t size; ///< maxs - mins
 	
-	float ltime; // local time for entity
+	float ltime; ///< Local time for entity
 	float nextthink;
 	
 	int movetype;
 	int solid;
 	
 	int skin;
-	int body; // TODO: unused
+	int body; ///< Selected sub-model for studio models // TODO: unused
 	int effects; // TODO: unused?
 	
-	float gravity;
-	float friction; // TODO: unused
+	float gravity; ///< % of "normal" gravity
+	float friction; ///< Inverse elasticity value of MOVETYPE_BOUNCE // TODO: unused
 	
 	int light_level;
 	
-	int sequence; // TODO: unused
-	int gaitsequence; // TODO: unused
+	int sequence; ///< Animation sequence // TODO: unused
+	int gaitsequence; ///< Movement animation sequence for player (0 = none) // TODO: unused
 	
-	float frame;
+	float frame; ///< % playback position in animation sequences (0-255)
 	
-	float animtime; // TODO: unused
-	float framerate; // TODO: unused
+	float animtime; ///< World time when frame was set // TODO: unused
+	float framerate; ///< Animation playback rate (from -8x to 8x) // TODO: unused
 	
-	byte controller[4]; // TODO: unused
-	byte blending[2]; // TODO: unused
+	byte controller[4]; ///< Bone controller settings (0-255 for each) // TODO: unused
+	byte blending[2]; ///< Blending amount between sub-sequences (0-255) // TODO: unused
 	
-	float scale; // TODO: unused?
+	float scale; ///< Sprite rendering scale (0-255) // TODO: unused?
 	
 	int rendermode; // TODO: unused?
 	float renderamt; // TODO: unused?
@@ -171,44 +180,44 @@ typedef struct entvars_s
 	// stats
 	float health;
 	float frags; // TODO: unused?
-	int weapon; // one of the IT_SHOTGUN, etc flags // TODO: unused?
+	int weapons; ///< One of the IT_SHOTGUN, etc flags (bit mask for available items/weapons) // TODO: unused?
 	float takedamage;
 	
 	int deadflag; // TODO: unused?
-	vec3_t view_ofs; // add to origin to get eye point
+	vec3_t view_ofs; ///< Add to origin to get eye point
 	
-	int button; // TODO: unused?
+	int button;
 	//int button0; // fire
 	//int button1; // use
 	//int button2; // jump
-	int impulse; // weapon changes // TODO: unused?
+	int impulse; ///< For things like weapon changes, flashlight toggling, cheats and such
 	
-	edict_t *chain; // entity
+	edict_t *chain; ///< Entity pointer when linked into a list
 	edict_t *dmg_inflictor; // TODO: unused?
 	edict_t *enemy; // TODO: unused?
-	edict_t	*aiment;
-	edict_t *owner; // who launched a missile // TODO: unused?
+	edict_t	*aiment; ///< Entity pointer used when move type is set to MOVETYPE_FOLLOW, points to an entity this entity should follow
+	edict_t *owner; ///< Who launched a missile // TODO: unused?
 	edict_t	*groundentity;
 	
 	int spawnflags; // TODO: unused?
 	int flags;
 	
-	int colormap;
+	int colormap; ///< Low byte - topcolor, high byte - bottomcolor
 	int team;
 	
-	float max_health; // players maximum health is stored here // TODO: unused?
-	float teleport_time; // don't back up
+	float max_health; ///< Players maximum health is stored here // TODO: unused?
+	float teleport_time; ///< Don't back up
 	
-	float armortype; // save this fraction of incoming damage // TODO: unused?
+	float armortype; ///< Save this fraction of incoming damage // TODO: unused?
 	float armorvalue; // TODO: unused?
 	
-	int waterlevel; // 0 = not in, 1 = feet, 2 = wast, 3 = eyes
-	int watertype; // a contents value
+	int waterlevel; ///< 0 = not in, 1 = feet, 2 = wast, 3 = eyes
+	int watertype; ///< A contents value
 	
 	string_t target; // TODO: unused?
 	string_t targetname; // TODO: unused?
 	string_t netname; // TODO: unused?
-	string_t message; // trigger messages // TODO: unused?
+	string_t message; ///< Trigger messages // TODO: unused?
 	
 	// damage is accumulated through a frame. and sent as one single
 	// message, so the super shotgun doesn't generate huge messages
@@ -217,13 +226,14 @@ typedef struct entvars_s
 	float dmg; // TODO: unused?
 	float dmgtime; // TODO: unused?
 	
-	// contains names of wavs to play
+	/// Contains names of wavs to play
 	string_t noise; // TODO: unused?
 	string_t noise1; // TODO: unused?
 	string_t noise2; // TODO: unused?
 	string_t noise3; // TODO: unused?
 	
 	float speed;
+	
 	float air_finished; // TODO: unused?
 	float pain_finished; // TODO: unused?
 	float radsuit_finished; // TODO: unused?
@@ -251,6 +261,7 @@ typedef struct entvars_s
 	
 	int groupinfo; // TODO: unused
 	
+	// For mods
 	int iuser1; // TODO: unused
 	int iuser2; // TODO: unused
 	int iuser3; // TODO: unused
