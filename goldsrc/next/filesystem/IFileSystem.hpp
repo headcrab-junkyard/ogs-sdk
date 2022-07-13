@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2015-2020 BlackPhrase
+ * Copyright (C) 2015-2022 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@
 
 #pragma once
 
-#include "CommonTypes.hpp"
-//#include "common/StringList.hpp"
-#include "tier1/interface.h"
+#include <CommonTypes.hpp>
+//#include <common/StringList.hpp>
+#include <tier1/interface.h>
 
 constexpr auto OGS_FILESYSTEM_INTERFACE_VERSION{"OGSFileSystem002"};
 
@@ -36,10 +36,10 @@ interface IFile;
 interface IFileSystem : public IBaseInterface
 {
 	/// Initialize the file system
-	virtual void Mount() = 0; // TODO: Init? return bool?
+	virtual void Mount() = 0; // TODO: return bool?
 	
 	/// Shutdown the file system
-	virtual void Unmount(/*bool abClosemfp, bool abReloading*/) = 0; // TODO: Shutdown?
+	virtual void Unmount(/*bool abClosemfp, bool abReloading*/) = 0;
 	
 	/**
 	* Restarts the file system
@@ -49,7 +49,7 @@ interface IFileSystem : public IBaseInterface
 	//virtual bool Restart() const = 0;
 	
 	/// @return true if the file system is initialized
-	//virtual bool IsMounted() const = 0; // TODO: IsInitialized?
+	//virtual bool IsMounted() const = 0;
 	
 	///
 	virtual void AddSearchPath(const char *asPath, const char *asAlias, bool abReadOnly = false) = 0;
@@ -63,40 +63,6 @@ interface IFileSystem : public IBaseInterface
 	///
 	virtual IFile *OpenPathID(const char *asPath, const char *asPathID) = 0;
 	
-	///
-	virtual IFile *OpenFile(const char *asName, const char *asMode) = 0;
-	
-	/// Closes a file
-	virtual void CloseFile(IFile *apFile) = 0;
-	
-	///
-	virtual /*long*/ int GetFileTime(const char *asPath) const = 0;
-	
-	/// Returns length of file, -1 if no file exists
-	virtual uint GetFileSize(const char *asPath) const = 0; // TODO: GetFileLength?
-	
-	///
-	virtual bool IsFileExists(const char *asFileName) const = 0;
-	
-	///
-	virtual bool IsDirectory(const char *asFileName) const = 0;
-	
-	enum class FolderState : int
-	{
-		Error = -1,
-		No    = 0,
-		Yes
-	};
-	
-	/// Renames a file, taken from idTech5 (minus the fsPath_t)
-	//virtual bool RenameFile(const char *relativePath, const char *newName, const char *basePath = "fs_savepath") = 0;
-	//virtual bool FileRename(const char *asOldName, const char *asNewName) const = 0;
-	
-	/**
-	* Remove the specified file
-	*/
-	//virtual bool DeleteFile(const char *asRelPath) const = 0;
-	
 	/// Modes for OpenFileByMode
 	enum class FileOpenMode : int
 	{
@@ -109,14 +75,51 @@ interface IFileSystem : public IBaseInterface
 	//virtual IFile *OpenFile(const char *asRelPath, FileOpenMode aeMode) = 0;
 	
 	///
+	virtual IFile *OpenFile(const char *asName, const char *asMode) = 0;
+	
+	/// Closes a file
+	virtual void CloseFile(IFile *apFile) = 0; // TODO: return int?
+	
+	///
+	virtual /*long*/ int GetFileTime(const char *asPath) const = 0;
+	
+	/// Returns length of file, -1 if no file exists
+	virtual uint GetFileSize(const char *asPath) const = 0; // TODO: GetFileLength?
+	
+	/// @param asFileName - name of the file to check for presence
+	/// @return true if the specified file exists, false otherwise
+	virtual bool IsFileExists(const char *asFileName) const = 0;
+	
+	enum class FolderState : int
+	{
+		Error = -1,
+		No    = 0,
+		Yes
+	};
+	
+	/// @return FolderState::Yes if the specified path is a folder, FolderState::No if not or FolderState::Error in case of error
+	//virtual FolderState IsFolder(const char *asPath) const = 0;
+	
+	/// @return true if the specified path is a directory, false otherwise
+	virtual bool IsDirectory(const char *asFileName) const = 0; // TODO: IsFolder?
+	
+	/// Renames a file, taken from idTech5 (minus the fsPath_t)
+	//virtual bool RenameFile(const char *relativePath, const char *newName, const char *basePath = "fs_savepath") = 0;
+	//virtual bool FileRename(const char *asOldName, const char *asNewName) const = 0;
+	
+	/**
+	* Remove the specified file
+	*/
+	//virtual bool DeleteFile(const char *asRelPath) const = 0;
+	
+	///
 	//virtual byte *LoadFile(char *asFileName, int *anLength) const = 0;
 	
 	/// Frees the memory allocated by ReadFile
 	//virtual void FreeFile(void *apBuffer) = 0;
 	
 	/// Properly handles partial reads
-	//int FileRead();
-	//virtual void ReadFile(const char *filename, void *buffer, int len) = 0;
+	//virtual /*int*/ void ReadFile(const char *filename, void *buffer, int len) = 0;
 	
 	///
 	//virtual void WriteFile(const char *filename, void *data, int len) = 0;
@@ -129,11 +132,6 @@ interface IFileSystem : public IBaseInterface
 	
 	/** Used by AI node graph code to determine if .bsp and .ain files are out of date */
 	//virtual int CompareFileTime(const char *asFileName1, const char *asFileName2, int *anCompare) = 0;
-	
-	/**
-	* Returns FOLDER_YES if the specified path is a folder
-	*/
-	//virtual /*bool*/ FolderState IsFolder(const char *asPath) const = 0;
 	
 	/**
 	*/

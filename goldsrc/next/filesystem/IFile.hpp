@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2017-2021 BlackPhrase
+ * Copyright (C) 2017-2022 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,9 +56,9 @@ interface IFile
 	
 	enum class SeekMode : int
 	{
-		Set = 0,
+		Set = 0, // TODO: Head?
 		Current,
-		End,
+		End, // TODO: Tail?
 	};
 	
 	/// Seek on a file
@@ -76,6 +76,12 @@ interface IFile
 	
 	///
 	virtual int SetVBuf(char *apBuffer, int anMode, size_t anSize) = 0;
+	
+	///
+	virtual void *GetReadBuffer(int *apOutBufferSize, bool abFailIfNotInCache = false) const = 0;
+	
+	///
+	virtual void ReleaseReadBuffer(void *apBuffer) = 0;
 	
 	///
 	virtual bool IsOk() const = 0; // TODO: IsValid? IsOK?
