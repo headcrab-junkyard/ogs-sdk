@@ -11,11 +11,15 @@
 #include <time.h>
 #include <stdarg.h>
 
+// TODO
+#include <const.h>
+/*
 #ifndef __BYTEBOOL__
 #define __BYTEBOOL__
 typedef enum {false, true} qboolean;
 typedef unsigned char byte;
 #endif
+*/
 
 // the dec offsetof macro doesn't work very well...
 #define myoffsetof(type,identifier) ((size_t)&((type *)0)->identifier)
@@ -31,7 +35,7 @@ int Q_strncasecmp (char *s1, char *s2, int n);
 int Q_strcasecmp (char *s1, char *s2);
 void Q_getwd (char *out);
 
-int filelength (FILE *f);
+int filelen (FILE *f); // TODO: was filelength
 int	FileTime (char *path);
 
 void	Q_mkdir (char *path);
