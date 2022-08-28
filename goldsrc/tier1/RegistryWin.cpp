@@ -24,11 +24,11 @@
 
 #include <windows.h>
 
-class CRegistryWin : public IRegistry
+class CRegistry : public IRegistry
 {
 public:
-    CRegistryWin();
-    ~CRegistryWin();
+    CRegistry();
+    ~CRegistry();
 
     void SetString(const char *asKey, const char *asValue) override;
     const char *GetString(const char *asKey) const override;
@@ -42,7 +42,7 @@ private:
     HKEY mhKey{0};
 };
 
-CRegistryWin gRegistry;
+CRegistry gRegistry;
 
 IRegistry *GetRegistry()
 {
@@ -52,7 +52,7 @@ IRegistry *GetRegistry()
 char msValue[64]{};
 
 // WORKS
-CRegistryWin::CRegistryWin()
+CRegistry::CRegistry()
 {
     auto sPath{"Software\\Valve\\Half-Life\\Settings"};
 	
@@ -85,20 +85,20 @@ CRegistryWin::CRegistryWin()
 };
 
 // WORKS
-CRegistryWin::~CRegistryWin()
+CRegistry::~CRegistry()
 {
 	printf("Trying to close the path...\n");
     RegCloseKey(mhKey);
 };
 
 // ?
-void CRegistryWin::SetString(const char *asKey, const char *asValue)
+void CRegistry::SetString(const char *asKey, const char *asValue)
 {
     RegSetValueEx(mhKey, asKey, 0, REG_SZ, reinterpret_cast<const BYTE*>(asValue), strlen(asValue) + 1);
 };
 
 // ?
-const char *CRegistryWin::GetString(const char *asKey) const
+const char *CRegistry::GetString(const char *asKey) const
 {
 	DWORD nLen{sizeof(msValue)};
 	memset(msValue, 0, sizeof(msValue));
@@ -107,13 +107,13 @@ const char *CRegistryWin::GetString(const char *asKey) const
 };
 
 // WORKS
-void CRegistryWin::SetInt(const char *asKey, int anValue)
+void CRegistry::SetInt(const char *asKey, int anValue)
 {
     RegSetValueEx(mhKey, asKey, 0, REG_DWORD, reinterpret_cast<const BYTE*>(&anValue), sizeof(anValue));
 };
 
 // WORKS
-int CRegistryWin::GetInt(const char *asKey) const
+int CRegistry::GetInt(const char *asKey) const
 {
 	DWORD nLen{sizeof(msValue)};
 	memset(msValue, 0, sizeof(msValue));
@@ -123,13 +123,13 @@ int CRegistryWin::GetInt(const char *asKey) const
 };
 
 // ?
-void CRegistryWin::SetBool(const char *asKey, bool abValue)
+void CRegistry::SetBool(const char *asKey, bool abValue)
 {
     SetInt(asKey, abValue ? 1 : 0);
 };
 
 // ?
-bool CRegistryWin::GetBool(const char *asKey) const
+bool CRegistry::GetBool(const char *asKey) const
 {
     return GetInt(asKey) ? true : false;
 };

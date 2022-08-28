@@ -20,11 +20,11 @@
 
 #include "IRegistry.hpp"
 
-class CRegistryUnix : public IRegistry
+class CRegistry : public IRegistry
 {
 public:
-    CRegistryUnix();
-    ~CRegistryUnix();
+    CRegistry();
+    ~CRegistry();
 
     void SetString(const char *asKey, const char *asValue) override;
     const char *GetString(const char *asKey) const override;
@@ -36,49 +36,49 @@ public:
     bool GetBool(const char *asKey) const override;
 };
 
-CRegistryUnix gRegistry;
+CRegistry gRegistry;
 
 IRegistry *GetRegistry()
 {
     return &gRegistry;
 };
 
-CRegistryUnix::CRegistryUnix()
+CRegistry::CRegistry()
 {
 
 };
 
-CRegistryUnix::~CRegistryUnix()
+CRegistry::~CRegistry()
 {
 
 };
 
-void CRegistryUnix::SetString(const char *asKey, const char *asValue)
+void CRegistry::SetString(const char *asKey, const char *asValue)
 {
 
 };
 
-const char *CRegistryUnix::GetString(const char *asKey) const
+const char *CRegistry::GetString(const char *asKey) const
 {
     return "";
 };
 
-void CRegistryUnix::SetInt(const char *asKey, int anValue)
+void CRegistry::SetInt(const char *asKey, int anValue)
 {
 
 };
 
-int CRegistryUnix::GetInt(const char *asKey) const
+int CRegistry::GetInt(const char *asKey) const
 {
     return 0;
 };
 
-void CRegistryUnix::SetBool(const char *asKey, bool abValue)
+void CRegistry::SetBool(const char *asKey, bool abValue)
 {
 
 };
 
-bool CRegistryUnix::GetBool(const char *asKey) const
+bool CRegistry::GetBool(const char *asKey) const
 {
     return false;
 };
