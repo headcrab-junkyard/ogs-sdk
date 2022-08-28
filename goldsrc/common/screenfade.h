@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2022 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,3 +19,19 @@
 /// @file
 
 #pragma once
+
+#include "const.h"
+
+typedef struct screenfade_s
+{
+	float fadeSpeed;
+	
+	float fadeEnd;
+	float fadeTotalEnd;
+	
+	float fadeReset;
+	
+	byte fader, fadeg, fadeb, fadealpha;
+	
+	int fadeFlags;
+} screenfade_t;
