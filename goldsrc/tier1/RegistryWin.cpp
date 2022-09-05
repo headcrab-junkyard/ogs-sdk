@@ -20,7 +20,7 @@
 
 #include <cstdio>
 
-#include "IRegistry.hpp"
+#include <tier1/IRegistry.hpp>
 
 #include <windows.h>
 

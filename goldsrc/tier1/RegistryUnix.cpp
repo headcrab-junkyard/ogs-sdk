@@ -18,7 +18,7 @@
 
 /// @file
 
-#include "IRegistry.hpp"
+#include <tier1/IRegistry.hpp>
 
 class CRegistry : public IRegistry
 {
