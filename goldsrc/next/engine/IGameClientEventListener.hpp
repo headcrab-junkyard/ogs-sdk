@@ -29,21 +29,39 @@ interface IGameClientEventListener
 	///
 	//virtual void Release() = 0;
 	
-	///
-	virtual bool OnClientConnect(int clientid, const char *name, const char *adr, char sRejectReason[128]) = 0;
+	/// Called when a client connects to the server
+	/// @param anClientID - client index
+	/// @param asName - client's preferred name string
+	/// @param asAdr - client's net address string
+	/// @param asRejectReason - a string used to store a reason in case this client was rejected by the server
+	/// @return true if the client should be accepted by the server, false otherwise
+	virtual bool OnClientConnect(int anClientID, const char *asName, const char *asAdr, char asRejectReason[128]) = 0;
 	
-	///
-	virtual void OnClientDisconnect(int clientid) = 0;
+	/// Called when a client is leaving the server
+	/// @param anClientID - client index
+	virtual void OnClientDisconnect(int anClientID) = 0;
 	
-	///
-	//virtual void OnClientKill(int clientid) = 0;
+	/// Called when a client sent a "kill" command (handled by OnClientCommand, will be removed soon)
+	//virtual void OnClientKill(int anClientID) = 0;
 	
-	///
-	virtual void OnClientPutInServer(int clientid) = 0;
+	/// Called when client is entering the server after a successful connection and ready to play
+	/// @param anClientID - client index
+	virtual void OnClientPutInServer(int anClientID) = 0;
 	
-	///
-	virtual void OnClientCommand(int clientid, const ICmdArgs &apArgs) = 0;
+	/// Called when a client sent a command to the server
+	/// @param anClientID - client index
+	/// @param aArgs - the command's arguments
+	virtual void OnClientCommand(int anClientID, const ICmdArgs &aArgs) = 0;
 	
-	///
-	virtual void OnClientUserInfoChanged(int clientid, char *userinfo) = 0;
+	/// Called after a client changed his user info
+	/// @param anClientID - client index
+	/// @param asUserInfo - client's new user info string
+	virtual void OnClientUserInfoChanged(int anClientID, char *asUserInfo) = 0;
+	
+	/// Called when one of the files failed the consistency check for the specified client/player
+	/// @param anClientID - client index
+	/// @param asFileName - file name which failed the check
+	/// @param asDisconnectMsg - a message which will be displayed to the client as a disconnect reason
+	/// @return 0 to allow the client to continue, 1 to immediately disconnect him (an send an optional message of up to 256 chars in length)
+	virtual int OnInconsistentFileFound(/*const*/ int anClientID, const char *asFileName, char *asDisconnectMsg) = 0;
 };
