@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2015-2020 BlackPhrase
+ * Copyright (C) 2015-2020, 2022 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,16 @@ interface IGame : public IBaseInterface
 	//virtual void StartFrame() = 0;
 	//virtual void Frame(double frametime) = 0;
 	virtual void Update() = 0;
+	
+	// TODO: INetProtocol?
+	
+	///
+	// TODO: temp?
+	virtual void HandleClientMessage(int anClientID, int anMsgID) = 0;
+	
+	///
+	// TODO: temp?
+	virtual int GetNetProtocolVersion() const = 0;
 	
 	/// @return current game title string
 	//virtual const char *GetDescription() const = 0;
