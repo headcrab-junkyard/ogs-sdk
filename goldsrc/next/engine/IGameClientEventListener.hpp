@@ -41,9 +41,6 @@ interface IGameClientEventListener
 	/// @param anClientID - client index
 	virtual void OnClientDisconnect(int anClientID) = 0;
 	
-	/// Called when a client sent a "kill" command (handled by OnClientCommand, will be removed soon)
-	//virtual void OnClientKill(int anClientID) = 0;
-	
 	/// Called when client is entering the server after a successful connection and ready to play
 	/// @param anClientID - client index
 	virtual void OnClientPutInServer(int anClientID) = 0;
@@ -64,4 +61,7 @@ interface IGameClientEventListener
 	/// @param asDisconnectMsg - a message which will be displayed to the client as a disconnect reason
 	/// @return 0 to allow the client to continue, 1 to immediately disconnect him (an send an optional message of up to 256 chars in length)
 	virtual int OnInconsistentFileFound(/*const*/ int anClientID, const char *asFileName, char *asDisconnectMsg) = 0;
+	
+	///
+	virtual void OnClientCvarValueReceived(int anClientID, int anRequestID, const char *asCvarName, const char *asCvarValue) = 0;
 };
