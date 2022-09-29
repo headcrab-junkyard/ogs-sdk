@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2016-2021 BlackPhrase
+ * Copyright (C) 2016-2022 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,9 @@
 #include "tier1/interface.h"
 
 constexpr auto OGS_GAMESERVER_INTERFACE_VERSION{"OGSGameServer003"};
+
+interface INetMsg;
+interface INetMsgHandler;
 
 interface IGameClient;
 interface IGameClientEventListener;
@@ -77,6 +80,12 @@ interface IGameServer : public IBaseInterface
 	
 	///
 	virtual int RegisterUserMsg(const char *sName, int nSize) = 0;
+	
+	///
+	virtual bool RegisterNetMsg(INetMsg *apMsg) = 0;
+	
+	///
+	virtual bool SetNetMsgHandler(const char *asMsg, INetMsgHandler *apHandler) = 0;
 	
 	/** Begin the Entity or UserMessage and dispatch to network layer */
 	virtual INetMsg *MessageBegin(int anMsgDest, int anMsgType, const float *avOrigin, IEntity *apEntity) = 0;
