@@ -31,7 +31,7 @@ typedef struct
 	short charwidth;
 } charinfo;
 
-typedef struct
+typedef struct qfont_s
 {
 	int width;
 	int height;
@@ -42,4 +42,4 @@ typedef struct
 	charinfo fontinfo[NUM_GLYPHS];
 	
 	byte *data[4];
-};
+} qfont_t;
