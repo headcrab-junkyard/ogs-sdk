@@ -24,6 +24,42 @@
 
 #include <next/CommonTypes.hpp>
 
+interface IShader;
+interface ITexture;
+
 interface IMaterial
 {
+	/// @return name of the material
+	virtual const char *GetName() const = 0;
+	
+	/// Material types
+	enum class Type : int
+	{
+		None = 0,
+		
+		Diffuse,
+		DiffuseAlpha,
+		DiffuseAdditive,
+		DiffuseNormalMap,
+		DiffuseSpecular,
+		
+		SizeOf
+	};
+	
+	/// @return type of the material
+	virtual Type GetType() const = 0;
+	
+	///
+	virtual void SetShader(IShader::Type aeType, uint anNum, IShader *apShader) = 0;
+	
+	///
+	virtual IShader *GetShader(IShader::Type aeType, uint anNum) const = 0;
+	
+	/// Sets the specified material texture to the specified texture
+	// TODO: eMaterialTexture -> string?
+	virtual void SetTexture(eMaterialTexture aeType, ITexture *apTexture) = 0;
+	
+	///
+	// TODO: eMaterialTexture -> string?
+	virtual ITexture *GetTexture(eMaterialTexture aeType) const = 0;
 };
