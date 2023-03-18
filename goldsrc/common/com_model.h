@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,8 @@
 #include "const.h"
 #include "mathlib.h"
 #include "bspfile.h"
+
+#define MAX_CLIENTS 32
 
 // TODO: defined in bspfile header
 //#define MAX_MAP_HULLS 4
@@ -180,7 +182,7 @@ typedef struct mleaf_s
 //typedef struct dclipnode_s dclipnode_t;
 
 // !!! if this is changed, it must be changed in asm_i386.h too !!!
-typedef struct
+typedef struct hull_s
 {
 	dclipnode_t	*clipnodes;
 	mplane_t	*planes;

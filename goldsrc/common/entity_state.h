@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018-2019 BlackPhrase
+ * Copyright (C) 2018-2019, 2021 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,8 @@
 typedef struct entity_state_s
 {
 	int		number;			///< edict index
+	
+	float msg_time;
 	
 	int messagenum; // all player's won't be updated each frame
 	
@@ -64,6 +66,8 @@ typedef struct clientdata_s
 	float health; // cl.stats[STAT_HEALTH]
 	
 	float waterjumptime;
+	
+	float maxspeed;
 } clientdata_t;
 
 typedef struct local_state_s

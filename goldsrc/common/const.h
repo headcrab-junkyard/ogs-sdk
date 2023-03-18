@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-2001 Id Software, Inc.
- * Copyright (C) 2018, 2020-2022 BlackPhrase
+ * Copyright (C) 2018, 2020-2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,16 +36,19 @@
 #define	FL_GODMODE				64
 #define	FL_NOTARGET				128
 #define	FL_ITEM					256
-#define	FL_ONGROUND				512
+#define	FL_ONGROUND				(1 << 9)
 #define	FL_PARTIALGROUND		1024	// not all corners are valid
 #define	FL_WATERJUMP			2048	// player jumping out of water
 #define FL_FROZEN (1 << 12)
 #define FL_FAKECLIENT (1 << 13)
 //#define	FL_JUMPRELEASED			4096	// for jump debouncing
+#define FL_DUCKING (1 << 14)
 
 #define FL_IMMUNE_WATER	131072
 #define	FL_IMMUNE_SLIME	262144
 #define FL_IMMUNE_LAVA	524288
+
+#define FL_ONTRAIN (1 << 24)
 
 #define FL_KILLME (1 << 30)
 #define FL_DORMANT (1 << 31)
@@ -85,9 +88,11 @@ enum
 	DEAD_NO = 0,
 	DEAD_DYING,
 	DEAD_DEAD,
-	DEAD_RESPAWNABLE
+	DEAD_RESPAWNABLE,
+	DEAD_DISCARDBODY
 };
 
+// takedamage values
 enum
 {
 	DAMAGE_NO = 0,
@@ -96,7 +101,6 @@ enum
 };
 
 // entity effects
-
 #define	EF_BRIGHTFIELD			1
 #define	EF_MUZZLEFLASH 			2
 #define	EF_BRIGHTLIGHT 			4
@@ -200,6 +204,7 @@ enum
 	MSG_INIT			// write to the init string
 };
 
+// contents of a spot in the world
 #define CONTENTS_EMPTY  -1
 #define CONTENTS_SOLID  -2
 #define	CONTENTS_WATER	-3
@@ -235,6 +240,7 @@ enum
 	ATTN_STATIC
 };
 
+// pitch values
 #define PITCH_NORM 100
 
 enum
@@ -245,9 +251,11 @@ enum
 
 enum
 {
-	kRenderFxNone = 0
+	kRenderFxNone = 0,
+	kRenderFxDeadPlayer
 };
 
+// hull types
 enum
 {
 	HULL_PLAYER = 0, ///< regular player hull
