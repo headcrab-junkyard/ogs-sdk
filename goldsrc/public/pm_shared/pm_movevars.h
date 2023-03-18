@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018, 2020-2021 BlackPhrase
+ * Copyright (C) 2018, 2020-2021, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,45 +18,45 @@
 */
 
 /// @file
-/// @brief move variables
+/// @brief move/physics variables
 
 #pragma once
 
 typedef struct movevars_s
 {
-	float gravity;
-	float stopspeed;
-	float maxspeed;
-	float spectatormaxspeed;
-	float accelerate;
-	float airaccelerate;
-	float wateraccelerate;
+	float gravity; ///< Gravity for map
+	float stopspeed; ///< Deceleration when not moving
+	float maxspeed; ///< Max allowed speed
+	float spectatormaxspeed; ///< Same as above but for spectators
+	float accelerate; ///< Acceleration factor
+	float airaccelerate; ///< Acceleration factor for open air
+	float wateraccelerate; ///< Acceleration factor for water
 	float friction;
-	float edgefriction;
-	float waterfriction;
-	float entgravity;
-	float bounce;
-	float stepsize;
-	float maxvelocity;
+	float edgefriction; ///< Extra friction near dropofs
+	float waterfriction; ///< Less in water
+	float entgravity; ///< Custom entity gravity, usually equals to 1.0
+	float bounce; ///< Wall bounce value, usually equals to 1.0
+	float stepsize; ///< Length of a single step set by the sv_stepsize cvar
+	float maxvelocity; ///< Max server velocity
 	
-	float zmax;
-	float waveHeight;
+	float zmax; ///< Max Z-buffer range (for renderer)
+	float waveHeight; ///< Water wave height (for renderer)
 	
-	qboolean footsteps;
+	qboolean footsteps; ///< Are footsteps sounds enabled?
 	
-	char skyName[32];
+	char skyName[32]; ///< Name of the sky map
 	
 	// These two are probably used only by the client-side...?
-	float rollangle; // = cvar_t cl_rollangle
-	float rollspeed; // = cvar_t cl_rollspeed
+	float rollangle; // = cvar_t cl_rollangle?
+	float rollspeed; // = cvar_t cl_rollspeed?
 	
-	float skycolor_r;
-	float skycolor_g;
-	float skycolor_b;
+	float skycolor_r; ///< Sky color, red channel
+	float skycolor_g; ///< Sky color, green channel
+	float skycolor_b; ///< Sky color, blue channel
 	
-	float skyvec_x;
-	float skyvec_y;
-	float skyvec_z;
+	float skyvec_x; ///< Sky vector, X value
+	float skyvec_y; ///< Sky vector, Y value
+	float skyvec_z; ///< Sky vector, Z value
 } movevars_t;
 
 extern movevars_t movevars;

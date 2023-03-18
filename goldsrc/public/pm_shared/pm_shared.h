@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,12 +20,6 @@
 
 #pragma once
 
-typedef struct playermove_s playermove_t;
-
-void PM_Init(playermove_t *ppmove);
-void PM_Move(playermove_t *ppmove, int server);
-char PM_GetTextureType(const char *name);
-
 /// Spectator Movement Modes
 /// (stored in pev->iuser1, so the physics code can get at them)
 enum
@@ -38,3 +32,9 @@ enum
 	OBS_MAP_FREE,
 	OBS_MAP_CHASE
 };
+
+typedef struct playermove_s playermove_t;
+
+void PM_Init(playermove_t *ppmove);
+void PM_Move(playermove_t *ppmove, int server);
+char PM_GetTextureType(const char *name); // TODO: PM_FindTextureType?
