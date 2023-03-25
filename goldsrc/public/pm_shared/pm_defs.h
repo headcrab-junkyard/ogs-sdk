@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 
+//#include <archtypes.h>
 #include <common/const.h>
 #include "pm_info.h"
 #include <common/pmtrace.h> // PM_PlayerTrace results
@@ -36,7 +37,10 @@
 #define MAX_CLIP_PLANES 5
 
 #define PM_NORMAL 0x00000000
-#define PM_STUDIO_BOX 0x00000002
+#define PM_STUDIO_IGNORE 0x00000001 ///< Skip studio models
+#define PM_STUDIO_BOX 0x00000002 ///< Use boxes for non-complex studio models (even in traceline)
+#define PM_GLASS_IGNORE 0x00000004 ///< Ignore entities with non-normal rendermode
+#define PM_WORLD_ONLY 0x00000008 ///< Only trace against the world
 
 // Values for flags parameter of PM_TraceLine
 enum
@@ -48,21 +52,54 @@ enum
 // Physical entity
 typedef struct physent_s
 {
-	char name[32]; // TODO
+	char name[32]; ///< Name of the model or "player"/"world" // TODO
 	
 	int player; // TODO
 	
-	vec3_t origin;
+	vec3_t origin; ///< Model's origin in world coords
 	
-	int info; // For client or server to identify
-	int solid; // TODO
-	int skin; // TODO
-	int rendermode; // TODO
+	struct model_s *model; ///< Only for bsp models
+	struct model_s *studiomodel ///< SOLID_BBOX, but studio clip intersections // TODO
 	
-	struct model_s *model;		// only for bsp models
-	//struct model_s *studiomodel ///< SOLID_BBOX, but studio clip intersections
-	vec3_t mins, maxs;	// only for non-bsp models
+	vec3_t mins, maxs; ///< Only for non-bsp models
+	
+	int info; // For client or server to identify (index into edicts or cl_entities)
+	
 	vec3_t angles; // rotated entities need this info for hull testing to work
+	
+	int solid; ///< Triggers and func_door type water brushes are SOLID_NOT // TODO
+	int skin; ///< BSP contents for such things as func_door water brushes // TODO
+	int rendermode; ///< So we can ignore glass // TODO
+	
+	// Complex collision detection
+	
+	// Animation
+	float frame; // TODO
+	int sequence; // TODO
+	byte controller[4]; // TODO
+	byte blending[2]; // TODO
+	
+	int movetype; // TODO
+	int takedamage; // TODO
+	int blooddecal; // TODO
+	int team; // TODO
+	int classnumber; // TODO
+	
+	// For mods
+	int iuser1; // TODO
+	int iuser2; // TODO
+	int iuser3; // TODO
+	int iuser4; // TODO
+	
+	float fuser1; // TODO
+	float fuser2; // TODO
+	float fuser3; // TODO
+	float fuser4; // TODO
+	
+	vec3_t vuser1; // TODO
+	vec3_t vuser2; // TODO
+	vec3_t vuser3; // TODO
+	vec3_t vuser4; // TODO
 } physent_t;
 
 /*
@@ -70,8 +107,6 @@ typedef struct
 {
 	// player state
 	qboolean dead;
-
-	int touchindex[MAX_PHYSENTS];
 } playermove_t;
 */
 
@@ -79,33 +114,33 @@ typedef struct hull_s hull_t;
 
 typedef struct playermove_s
 {
-	int player_index; // TODO
+	int player_index; ///< So we don't try to run the PM_CheckStuck nudging too quickly // TODO
 	
-	qboolean server;
-	qboolean multiplayer; // TODO
+	qboolean server; ///< For debugging, are we running physics code on a server side?
+	qboolean multiplayer; ///< 1 = multiplayer server // TODO
 	
-	float time; // TODO
-	float frametime;
+	float time; ///< = realtime on host, for reckoning duck timing // TODO
+	float frametime; ///< Duration of this frame
 	
-	vec3_t forward, right, up; // vectors for angles
+	vec3_t forward, right, up; ///< Vectors for angles
 	
-	//int		sequence;	// just for debugging prints // UNUSED
+	//int sequence;	// just for debugging prints // UNUSED
 
 	// player state
-	vec3_t	origin;
-	vec3_t	angles;
-	vec3_t oldangles; // TODO
-	vec3_t	velocity;
-	vec3_t	movedir;
-	vec3_t basevelocity; // TODO
+	vec3_t origin; ///< Movement origin
+	vec3_t angles; ///< Movement view angles
+	vec3_t oldangles; ///< Angles before movement view angles were looked at // TODO
+	vec3_t velocity; ///< Current movement direction
+	vec3_t movedir; ///< For waterjumping, a forced forward velocity so we can fly over lip of ledge
+	vec3_t basevelocity; ///< Velocity of the conveyor we are standing on // TODO
 	
 	// For ducking/dead
 	vec3_t view_ofs; ///< Our eye position
-	float flDuckTime; // TODO
-	qboolean bInDuck; // TODO
+	float flDuckTime; ///< Time we started to duck // TODO
+	qboolean bInDuck; ///< In process of ducking or ducked already? // TODO
 	
 	// For walking/falling
-	int flTimeStepSound; // TODO
+	int flTimeStepSound; ///< Next time we can play a step sound // TODO
 	int iStepLeft; // TODO
 	
 	float flFallVelocity; // TODO
@@ -115,34 +150,18 @@ typedef struct playermove_s
 	
 	float flNextPrimaryAttack; // TODO
 	
-	int effects; // TODO
+	int effects; ///< Muzzle flash and such // TODO
 	
-	int flags;
-	int usehull;
-	float gravity; // TODO
+	int flags; ///< Currently set flags, FL_ONGROUND, FL_DUCKING, etc
+	int usehull; ///< Currently used hull type, 0 = regular player hull, 1 = ducked player hull, 2 = point hull
+	float gravity; ///< Our current gravity and friction // TODO
 	float friction; // TODO
-	int		oldbuttons;
-	float		waterjumptime;
-	qboolean	dead;
+	int oldbuttons; ///< Buttons from last usercmd
+	float waterjumptime; ///< Amout of time left in jumping out of water cycle
+	qboolean dead; ///< Are we a dead player?
 	int deadflag; // TODO
-	int		spectator;
-	int movetype;
-	
-	// For mods
-	int iuser1;
-	int iuser2;
-	int iuser3;
-	int iuser4;
-	
-	float fuser1;
-	float fuser2;
-	float fuser3;
-	float fuser4;
-	
-	vec3_t vuser1;
-	vec3_t vuser2;
-	vec3_t vuser3;
-	vec3_t vuser4;
+	int spectator; ///< Should we use spectator physics model?
+	int movetype; ///< Our movement type, NOCLIP, WALK, FLY
 	
 	int onground;
 	int waterlevel;
@@ -154,26 +173,42 @@ typedef struct playermove_s
 	
 	float maxspeed;
 	float clientmaxspeed; ///< Player-specific maxspeed // TODO
+	
+	// For mods
+	int iuser1; // TODO
+	int iuser2; // TODO
+	int iuser3; // TODO
+	int iuser4; // TODO
+	
+	float fuser1; // TODO
+	float fuser2; // TODO
+	float fuser3; // TODO
+	float fuser4; // TODO
+	
+	vec3_t vuser1; // TODO
+	vec3_t vuser2; // TODO
+	vec3_t vuser3; // TODO
+	vec3_t vuser4; // TODO
 
 	// world state
-	int		numphysent; ///< Number of entities to clip against
-	physent_t	physents[MAX_PHYSENTS];	// 0 should be the world
+	int numphysent; ///< Number of entities to clip against
+	physent_t physents[MAX_PHYSENTS];	// 0 should be the world
 	
 	int nummoveent; ///< Number of movement entities (ladders) // TODO
 	physent_t moveents[MAX_MOVEENTS]; ///< Just a list of ladders // TODO
 	
-	// All things being rendered, for tracing against things you don't actually collide with
+	/// All things being rendered, for tracing against things you don't actually collide with
 	int numvisent; // TODO
 	physent_t visents[MAX_PHYSENTS]; // TODO
 	
-	// Input to run through physics
+	/// Input to run through physics
 	usercmd_t cmd;
 
-	// results
-	int		numtouch;
-	pmtrace_t touchindex[MAX_PHYSENTS];
+	/// Trace results for objects we collided with
+	int numtouch;
+	pmtrace_t touchindex[MAX_PHYSENTS]; // TODO: was int
 	
-	char physinfo[MAX_PHYSINFO_STRING]; // physics info string // TODO
+	char physinfo[MAX_PHYSINFO_STRING]; ///< Physics info string // TODO
 	
 	struct movevars_s *movevars;
 	
