@@ -25,8 +25,8 @@
 
 typedef struct
 {
-	vec3_t	normal;
-	float	dist;
+	vec3_t normal;
+	float dist;
 } pmplane_t;
 
 typedef struct pmtrace_s

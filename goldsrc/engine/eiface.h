@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-2001 Id Software, Inc.
- * Copyright (C) 2018-2021 BlackPhrase
+ * Copyright (C) 2018-2022 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,8 +26,11 @@
 #include "crc.h"
 #include "Sequence.h"
 
-#define	INTERFACE_VERSION 140
-#define NEW_DLL_FUNCTIONS_VERSION 1
+
+#define MAX_LEVEL_CONNECTIONS 16
+
+const int INTERFACE_VERSION = 140;
+const int NEW_DLL_FUNCTIONS_VERSION = 1;
 
 typedef enum
 {
@@ -239,12 +242,12 @@ typedef struct enginefuncs_s
 	
 	void (*pfnCrosshairAngle)(const edict_t *pClient, float pitch, float yaw);
 	
-	byte *(*pfnLoadFileForMe)(char *filename, int *pLength);
+	byte *(*pfnLoadFileForMe)(const char *filename, int *pLength);
 	void (*pfnFreeFile)(void *buffer);
 	
 	void (*pfnEndSection)(const char *sSectionName);
 	
-	int (*pfnCompareFileTime)(char *filename1, char *filename2, int *pCompare);
+	int (*pfnCompareFileTime)(const char *filename1, const char *filename2, int *pCompare);
 	
 	void (*pfnGetGameDir)(char *sGameDir);
 	
@@ -316,7 +319,7 @@ typedef struct enginefuncs_s
 	
 	int (*pfnCreateInstancedBaseline)(int classname, struct entity_state_s *baseline);
 	
-	void (*pfnCvar_DirectSet)(struct cvar_s *var, char *value);
+	void (*pfnCvar_DirectSet)(struct cvar_s *var, const char *value);
 	
 	void (*pfnForceUnmodified)(FORCE_TYPE type, float *mins, float *maxs, const char *filename);
 	
@@ -364,6 +367,16 @@ typedef struct KeyValueData_s
 	int32_t fHandled; ///< (out) set this to 1 if a request was processed
 } KeyValueData;
 
+typedef struct
+{
+	int shutupmsvc; // TODO
+} ENTITYTABLE;
+
+typedef struct
+{
+	int shutupmsvc; // TODO
+} LEVELLIST;
+
 // TODO
 typedef struct saverestore_s
 {
@@ -382,7 +395,7 @@ typedef struct saverestore_s
 	int connectionCount;
 	
 	//ENTITYTABLE *pTable; // TODO
-	//LEVELLIST levelList[MAX_LEVELCONNECTIONS];
+	LEVELLIST levelList[MAX_LEVEL_CONNECTIONS];
 	
 	int fUseLandmark;
 	char szLandmarkName[20];

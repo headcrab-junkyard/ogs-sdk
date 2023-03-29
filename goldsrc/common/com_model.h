@@ -51,10 +51,10 @@ typedef enum {ST_SYNC=0, ST_RAND } synctype_t;
 // !!! if this is changed, it must be changed in asm_i386.h too !!!
 typedef struct mplane_s
 {
-	vec3_t	normal;
-	float	dist;
-	byte	type;			// for texture axis selection and fast side tests
-	byte	signbits;		// signx + signy<<1 + signz<<1
+	vec3_t	normal; ///< Surface normal
+	float	dist; ///< Closest approach to origin
+	byte	type; ///< For texture axis selection and fast side tests
+	byte	signbits; ///< signx + signy<<1 + signz<<1
 	byte	pad[2];
 } mplane_t;
 

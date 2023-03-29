@@ -40,17 +40,17 @@ void PR_LoadProgs ();
 edict_t *ED_Alloc ();
 void ED_Free (edict_t *ed);
 
-char	*ED_NewString (char *string);
+char	*ED_NewString (const char *string);
 // returns a copy of the string allocated from the server's string heap
 
 void ED_Print (edict_t *ed);
 void ED_Write (FILE *f, edict_t *ed);
-char *ED_ParseEdict (char *data, edict_t *ent);
+const char *ED_ParseEdict (const char *data, edict_t *ent);
 
 void ED_WriteGlobals (FILE *f);
 void ED_ParseGlobals (char *data);
 
-void ED_LoadFromFile (char *data);
+void ED_LoadFromFile (const char *data);
 
 //define EDICT_NUM(n) ((edict_t *)(sv.edicts+ (n)*pr_edict_size))
 //define NUM_FOR_EDICT(e) (((byte *)(e) - sv.edicts)/pr_edict_size)
