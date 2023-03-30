@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018 BlackPhrase
+ * Copyright (C) 2018, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,26 +21,32 @@
 
 #pragma once
 
-#include "const.h"
-#include "entity_state.h"
+#include <common/const.h>
+#include <common/entity_state.h>
+
 #include "progdefs.h"
 
-#define	MAX_ENT_LEAFS	48
+#define	MAX_ENT_LEAFS 48
 
 typedef struct edict_s
 {
-	qboolean	free;
-	link_t		area;				///< linked to a division node or leaf
+	qboolean free;
+	int serialnumber; // TODO
 	
-	int			num_leafs;
-	short		leafnums[MAX_ENT_LEAFS];
-
-	entity_state_t	baseline;
+	link_t area; ///< Linked to a division node or leaf
 	
-	float		freetime;			///< sv.time when the object was freed
+	int headnode; ///< -1 to use normal leaf check // TODO
 	
-	void *pvPrivateData; ///< Allocated and released by engine module, used by game module
+	int num_leafs;
+	short leafnums[MAX_ENT_LEAFS];
 	
-	entvars_t	v;					///< C exported fields from progs
-// other fields from progs come immediately after
+	//entity_state_t baseline; // TODO: remove
+	
+	float freetime; ///< sv.time when the object was freed
+	
+	void *pvPrivateData; ///< Allocated and released by engine module, used by game module // TODO
+	
+	entvars_t v; ///< C exported fields from progs
+	
+	// Other fields from progs come immediately after
 } edict_t;
