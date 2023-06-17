@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine SDK
  *
- * Copyright (C) 2015-2018, 2023 BlackPhrase
+ * Copyright (C) 2023 BlackPhrase
  *
  * OGS Engine SDK is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
