@@ -18,6 +18,7 @@
 */
 
 /// @file
+/// @brief console command interface
 
 #pragma once
 
@@ -25,7 +26,7 @@
 
 interface ICmdArgs;
 
-interface ICmd
+interface IConCmd
 {
 	virtual void Exec(const ICmdArgs &aArgs) = 0;
 };
