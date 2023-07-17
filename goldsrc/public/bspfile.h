@@ -1,7 +1,7 @@
 /*
  *	This file is part of OGS Engine
  *	Copyright (C) 1996-2001 Id Software, Inc.
- *	Copyright (C) 2018-2019 BlackPhrase
+ *	Copyright (C) 2018-2019, 2023 BlackPhrase
  *
  *	OGS Engine is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 
 #pragma once
 
-#include "const.h"
+#include <common/const.h>
 
 // upper design bounds
 
@@ -64,31 +64,34 @@
 
 //=============================================================================
 
-#define BSPVERSION 30 // TODO: 29 for quake
-#define TOOLVERSION 2
+const int BSPVERSION = 30; // TODO: 29 for quake
+const int TOOLVERSION = 2;
 
 typedef struct
 {
 	int fileofs, filelen;
 } lump_t;
 
-#define LUMP_ENTITIES 0
-#define LUMP_PLANES 1
-#define LUMP_TEXTURES 2
-#define LUMP_VERTEXES 3
-#define LUMP_VISIBILITY 4
-#define LUMP_NODES 5
-#define LUMP_TEXINFO 6
-#define LUMP_FACES 7
-#define LUMP_LIGHTING 8
-#define LUMP_CLIPNODES 9
-#define LUMP_LEAFS 10
-#define LUMP_MARKSURFACES 11
-#define LUMP_EDGES 12
-#define LUMP_SURFEDGES 13
-#define LUMP_MODELS 14
+enum
+{
+	LUMP_ENTITIES = 0,
+	LUMP_PLANES,
+	LUMP_TEXTURES,
+	LUMP_VERTEXES,
+	LUMP_VISIBILITY,
+	LUMP_NODES,
+	LUMP_TEXINFO,
+	LUMP_FACES,
+	LUMP_LIGHTING,
+	LUMP_CLIPNODES,
+	LUMP_LEAFS,
+	LUMP_MARKSURFACES,
+	LUMP_EDGES,
+	LUMP_SURFEDGES,
+	LUMP_MODELS,
 
-#define HEADER_LUMPS 15
+	HEADER_LUMPS
+};
 
 typedef struct
 {
@@ -182,6 +185,7 @@ typedef struct texinfo_s
 	int miptex;
 	int flags;
 } texinfo_t;
+
 #define TEX_SPECIAL 1 // sky or slime, no lightmap or 256 subdivision
 
 // note that edge 0 is never used, because negative edge nums are used for
@@ -322,4 +326,4 @@ void GetVectorForKey(entity_t *ent, char *key, vec3_t vec);
 
 epair_t *ParseEpair();
 
-#endif
+#endif // QUAKE_GAME
