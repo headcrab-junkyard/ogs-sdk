@@ -25,6 +25,8 @@
 #pragma once
 
 #include <string>
+#include <string_view>
+
 #include <list>
 #include <vector>
 #include <set>
@@ -70,6 +72,13 @@ using tString = std::string;
 using tStringList = std::list<tString>;
 using tStringVec = std::vector<tString>;
 using tStringSet = std::set<tString>;
+
+namespace ogs
+{
+
+using tStringView = std::string_view;
+
+}; // namespace ogs
 
 using tWString = std::wstring;
 using tWStringList = std::list<tWString>;
