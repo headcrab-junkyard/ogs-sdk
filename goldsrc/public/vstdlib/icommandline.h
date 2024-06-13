@@ -21,7 +21,21 @@
 
 #pragma once
 
-#include <tier0/platform.h>
+#include "vstdlib.h"
+
+// TODO: move to commandline.h?
+class VSTDLIB_CLASS CCommandLineParam
+{
+public:
+	CCommandLineParam(const char *, const char *);
+	~CCommandLineParam();
+	
+	// NOTE: assignment operator
+	
+	bool Exists();
+	
+	int GetHParam();
+};
 
 //abstract_class
 struct ICommandLine
@@ -64,4 +78,4 @@ struct ICommandLine
 };
 
 /// Gets a singleton to the commandline interface
-PLATFORM_INTERFACE ICommandLine *CommandLine();
+VSTDLIB_INTERFACE ICommandLine *CommandLine();
