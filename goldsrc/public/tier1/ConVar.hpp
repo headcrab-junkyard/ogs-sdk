@@ -35,7 +35,7 @@ public:
 	CConVar(cvar_t *apData, const char *asDesc = "");
 	//virtual ~CConVar() = default;
 	
-	void Revert() override; // TODO: Reset? ResetValue?
+	void Reset() override; // TODO: Revert? ResetValue?
 	
 	// Setters
 	

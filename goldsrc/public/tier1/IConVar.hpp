@@ -18,7 +18,7 @@
 */
 
 /// @file
-/// @brief console variable interface
+/// @brief console/config variable interface
 
 #pragma once
 
@@ -38,34 +38,37 @@ interface IConVar
 	//virtual void Release() = 0;
 	
 	/// Resets the value to default
-	virtual void Reset() = 0;
+	virtual void Reset() = 0; // TODO: ResetValue? Revert?
 	
 	/**
 	* Sets a listener to listen for value changes and react to them
 	*
 	* @param apListener A pointer to a listener interface implementation
 	*/
-	virtual void SetChangeValueListener(IConVarValueListener *apListener) = 0;
+	//virtual void SetChangeValueListener(IConVarValueListener *apListener) = 0;
 	
-	/// @return Name of this variable
+	/// @return Name of the variable
 	virtual const char *GetName() const = 0;
 	
 	/// @return The variable's description string
 	virtual const char *GetDesc() const = 0;
+	
+	/// @return The default value of the variable
+	virtual const char *GetDefValue() const = 0;
 	
 	/**
 	* Set variable flags (override)
 	*
 	* @param anFlags - new flag bitsum that overrides the previous
 	*/
-	virtual void SetFlags(int anFlags) = 0;
+	//virtual void SetFlags(int anFlags) = 0;
 	
 	/**
 	* Add flags to current bitsum
 	*
 	* @param anFlags - flag bitsum to add
 	*/
-	virtual void AddFlags(int anFlags) = 0;
+	//virtual void AddFlags(int anFlags) = 0;
 	
 	/**
 	* Check if specified flags are present
@@ -76,7 +79,7 @@ interface IConVar
 	virtual bool HasFlags(int anFlags) const = 0;
 	
 	/// @return Current flags bitsum
-	virtual int GetFlags() const = 0;
+	//virtual int GetFlags() const = 0;
 	
 	/**
 	* Set value to the specified string
