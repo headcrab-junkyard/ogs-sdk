@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018, 2022 BlackPhrase
+ * Copyright (C) 2018, 2022, 2024 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 
 #include "const.h"
 
-const int NUM_GLYPHS = 256;
+#define NUM_GLYPHS 256
 
 typedef struct
 {
@@ -41,5 +41,5 @@ typedef struct qfont_s
 	
 	charinfo fontinfo[NUM_GLYPHS];
 	
-	byte *data[4];
+	byte data[4];
 } qfont_t;

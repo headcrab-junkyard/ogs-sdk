@@ -44,7 +44,11 @@ typedef enum
 // must match definition in both modelgen.h and spritegn.h
 #ifndef SYNCTYPE_T
 #define SYNCTYPE_T
-typedef enum {ST_SYNC=0, ST_RAND } synctype_t;
+typedef enum
+{
+	ST_SYNC = 0,
+	ST_RAND
+} synctype_t;
 #endif
 
 // plane_t structure

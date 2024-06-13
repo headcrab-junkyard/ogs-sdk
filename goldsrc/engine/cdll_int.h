@@ -1,6 +1,6 @@
 /*
  * This file is part of OGS Engine
- * Copyright (C) 2018, 2021 BlackPhrase
+ * Copyright (C) 2018, 2021, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,13 +28,13 @@ extern "C"
 
 #include <stdint.h>
 
-#include "const.h"
-//#include "in_buttons.h" // TODO
-#include "wrect.h" // TODO
-
-#define CLDLL_INTERFACE_VERSION 1 // TODO: 7
+#include <common/const.h>
+//#include <common/in_buttons.h> // TODO
+#include <common/wrect.h> // TODO
 
 #define MAX_ALIAS_NAME 32
+
+const int CLDLL_INTERFACE_VERSION = 7;
 
 typedef struct cmdalias_s
 {

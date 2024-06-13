@@ -21,13 +21,13 @@
 
 #pragma once
 
-#include "const.h"
+#include <common/const.h>
 
 typedef struct
 {
-	float	time;
-	float	frametime;
-	float	force_retouch;	// force all entities to touch triggers
+	float time;
+	float frametime;
+	float force_retouch;	// force all entities to touch triggers
 							// next frame.  this is needed because
 							// non-moving things don't normally scan
 							// for triggers, and when a trigger is

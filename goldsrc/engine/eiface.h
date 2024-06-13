@@ -22,10 +22,10 @@
 #pragma once
 
 #include <stdint.h>
-#include "const.h"
-#include "crc.h"
-#include "Sequence.h"
 
+#include <const.h>
+#include <crc.h>
+#include <Sequence.h>
 
 #define MAX_LEVEL_CONNECTIONS 16
 

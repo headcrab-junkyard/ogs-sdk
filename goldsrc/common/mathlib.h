@@ -34,13 +34,13 @@ typedef	int	fixed8_t;
 typedef	int	fixed16_t;
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	// matches value in gcc v2 math.h
+#define M_PI 3.14159265358979323846 // Matches value in gcc v2 math.h
 #endif
 
 struct mplane_s;
 
 extern vec3_t vec3_origin;
-extern	int nanmask;
+extern int nanmask;
 
 #define	IS_NAN(x) (((*(int *)&x)&nanmask)==nanmask)
 

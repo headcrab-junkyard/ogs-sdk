@@ -1,7 +1,7 @@
 /*
  * This file is part of OGS Engine
  * Copyright (C) 1996-1997 Id Software, Inc.
- * Copyright (C) 2018-2019 BlackPhrase
+ * Copyright (C) 2018-2019, 2023 BlackPhrase
  *
  * OGS Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,13 +29,13 @@ typedef uint32_t CRC32_t;
 
 void CRC32_Init(CRC32_t *crcvalue);
 CRC32_t CRC32_Final(CRC32_t crcvalue);
-void CRC32_ProcessBuffer(CRC32_t *crcvalue, void *data, int len);
+void CRC32_ProcessBuffer(CRC32_t *crcvalue, /*const*/ void *data, int len); // TODO
 void CRC32_ProcessByte(CRC32_t *crcvalue, unsigned char data);
 
 //int CRC_File(CRC32_t *crcvalue, const char *pszFileName); // TODO
 
 CRC32_t CRC32_Value(CRC32_t crcvalue);
-CRC32_t CRC32_Block (byte *start, int count);
+CRC32_t CRC32_Block(byte *start, int count);
 
 byte COM_BlockSequenceCRCByte(byte *base, int length, int sequence);
 
