@@ -52,4 +52,4 @@ public:
 
 VSTDLIB_INTERFACE IKeyValuesSystem *KeyValuesSystem();
 
-//#define KEYVALYESSYSTEM_INTERFACE_VERSION "KeyValuesSystem002"
+//#define KEYVALUESSYSTEM_INTERFACE_VERSION "KeyValuesSystem002"

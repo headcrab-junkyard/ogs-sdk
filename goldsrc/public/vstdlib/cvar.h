@@ -22,7 +22,7 @@
 
 #include "vstdlib.h"
 
-#include <tier1/interface.h>
+//#include <tier1/interface.h>
 
 #include <icvar.h>
 

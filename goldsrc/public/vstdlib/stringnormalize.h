@@ -24,6 +24,7 @@
 
 class CValidator;
 
+// TODO: make private?
 class VSTDLIB_CLASS CStringNormalization
 {
 public:

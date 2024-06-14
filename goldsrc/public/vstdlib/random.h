@@ -36,7 +36,7 @@ public:
 	/// Generates random numbers
 	virtual float RandomFloat(float afMinValue = 0.0f, float afMaxValue = 1.0f) = 0;
 	virtual int RandomInt(int anMinValue, int anMaxValue) = 0;
-	virtual float RandomFloatExp(float afMinValue = 0.0f, float afMaxValue = 1.0f, float afExponent = 1.0f) = 0;
+	//virtual float RandomFloatExp(float afMinValue = 0.0f, float afMaxValue = 1.0f, float afExponent = 1.0f) = 0;
 };
 
 /// The standard generator of uniformly distributed random numbers
@@ -44,9 +44,6 @@ class VSTDLIB_CLASS CUniformRandomStream : public IUniformRandomStream
 {
 public:
 	CUniformRandomStream();
-	// NOTE: copy constructor
-	
-	// NOTE: assignment operator
 	
 	/// Sets the seed of the random number generator
 	virtual void SetSeed(int anSeed) override;
@@ -58,7 +55,7 @@ public:
 private:
 	int GenerateRandomNumber(); // TODO: make public?
 private:
-	CThreadFastMutex mMutex;
+	CThreadFastMutex mMutex; // TODO: non-gs?
 	
 	int mnDum;
 	int mnY;
@@ -69,8 +66,6 @@ private:
 class VSTDLIB_CLASS CGaussianRandomStream
 {
 public:
-	// NOTE: assignment operator
-	
 	/// Passing in nullptr cause the gaussian stream to use the
 	/// preinstalled global random number generator
 	CGaussianRandomStream(IUniformRandomStream *apUniformStream = nullptr);
@@ -81,7 +76,7 @@ public:
 	/// Generates random numbers
 	float RandomFloat(float afMean = 0.0f, float afStdDev = 1.0f);
 private:
-	CThreadFastMutex mMutex;
+	CThreadFastMutex mMutex; // TODO: non-gs?
 	
 	IUniformRandomStream *mpUniformStream{nullptr};
 	
@@ -93,8 +88,8 @@ private:
 /// A couple of convenience functions to access the library's global uniform stream
 VSTDLIB_INTERFACE void RandomSeed(int anSeed);
 VSTDLIB_INTERFACE float RandomFloat(float afMinValue = 0.0f, float afMaxValue = 1.0f);
-VSTDLIB_INTERFACE float RandomGaussianFloat(float afMean = 0.0f, float afStdDev = 1.0f);
 VSTDLIB_INTERFACE int RandomInt(int anMinValue, int anMaxValue);
+VSTDLIB_INTERFACE float RandomGaussianFloat(float afMean = 0.0f, float afStdDev = 1.0f);
 
 /// Installs a global random number generator, which will affect the Random* functions above
 VSTDLIB_INTERFACE void InstallUniformRandomStream(IUniformRandomStream *apStream);
