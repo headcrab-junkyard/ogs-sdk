@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2015-2020, 2022 BlackPhrase
+ * Copyright (C) 2015-2020, 2022-2024 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,23 +22,24 @@
 
 #pragma once
 
-#include "CommonTypes.hpp"
-#include "tier1/interface.h"
+#include <next/ext/IEngineSubSystem.hpp>
 
-constexpr auto OGS_GAME_INTERFACE_VERSION{"OGSGame001"};
+constexpr auto OGS_GAME_INTERFACE_VERSION{"OGSGame002"};
 
-interface IGame : public IBaseInterface
+interface INetMsg;
+
+interface IGame : public IEngineSubSystem
 {
 	/**
 	* Initialize the game for the first time
 	*/
-	virtual bool Init(CreateInterfaceFn afnEngineFactory) = 0;
+	virtual bool Init() = 0;
 	
 	/**
 	* Shut down the entire game
 	* Called once when the module is unloaded
 	*/
-	virtual void Shutdown() = 0;
+	//virtual void Shutdown() = 0;
 	
 	/**
 	*/

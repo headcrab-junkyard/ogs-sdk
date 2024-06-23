@@ -1,7 +1,7 @@
 /*
  * This file is part of OGSNext Engine
  *
- * Copyright (C) 2015-2018, 2020, 2022-2023 BlackPhrase
+ * Copyright (C) 2015-2018, 2020, 2022-2024 BlackPhrase
  *
  * OGSNext Engine is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
 
 #pragma once
 
-#include <next/CommonTypes.hpp>
-#include <tier1/interface.h>
+#include <next/ext/IEngineSubSystem.hpp>
 
-constexpr auto OGS_PHYSICS_INTERFACE_VERSION{"OGSPhysics001"};
+constexpr auto OGS_PHYSICS_INTERFACE_VERSION{"OGSPhysics002"};
 
 interface IPhysicsWorld;
 
-interface IPhysics : public IBaseInterface
+// TODO: IPhysicsSystem?
+interface IPhysics : public IEngineSubSystem
 {
 	virtual IPhysicsWorld *CreateWorld() = 0;
 	virtual void DestroyWorld(IPhysicsWorld *apWorld) = 0;
