@@ -1,7 +1,7 @@
 /*
  * This file is part of OpenLambda Project
  *
- * Copyright (C) 2019, 2022 BlackPhrase
+ * Copyright (C) 2019, 2022, 2024 BlackPhrase
  *
  * OpenLambda Project is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,16 +21,12 @@
 
 #pragma once
 
-#include <CommonTypes.hpp>
-#include <tier1/interface.h>
-
-constexpr auto OGS_GAMEVENTMANAGERCLIENT_INTERFACE_VERSION{"OGSGameEventManagerClient001"};
-constexpr auto OGS_GAMEVENTMANAGERSERVER_INTERFACE_VERSION{"OGSGameEventManagerServer001"};
+#include <next/CommonTypes.hpp>
 
 interface IGameEvent;
 
-interface IGameEventManager : public IBaseInterface
+interface IGameEventListener
 {
 	///
-	virtual bool FireEvent(IGameEvent *apEvent) = 0;
+	virtual void OnEvent(IGameEvent *apEvent) = 0; // TODO: reference?
 };
